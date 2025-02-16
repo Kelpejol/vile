@@ -1,0 +1,135 @@
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Definitions for complex gradients and filters -->
+  <defs>
+    <!-- Radial gradient for the core -->
+    <radialGradient id="coreGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#00f7ff"/>
+      <stop offset="50%" style="stop-color:#0066ff"/>
+      <stop offset="100%" style="stop-color:#2600ff"/>
+    </radialGradient>
+    
+    <!-- Linear gradient for the orbiting elements -->
+    <linearGradient id="orbitGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff00f7"/>
+      <stop offset="100%" style="stop-color:#7000ff"/>
+    </linearGradient>
+    
+    <!-- Glow filter -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background hexagonal grid -->
+  <g transform="translate(200 200)">
+    <path d="M0,-180 L156,-90 L156,90 L0,180 L-156,90 L-156,-90 Z" 
+          fill="none" 
+          stroke="#2600ff" 
+          stroke-width="1" 
+          opacity="0.3">
+      <animate attributeName="stroke-dasharray" 
+               values="0,1000;1000,0" 
+               dur="3s" 
+               repeatCount="indefinite"/>
+    </path>
+  </g>
+
+  <!-- Core sphere -->
+  <circle cx="200" cy="200" r="100" 
+          fill="url(#coreGradient)" 
+          filter="url(#glow)">
+    <animate attributeName="filter" 
+             values="url(#glow);url(#glow) saturate(200%);url(#glow)" 
+             dur="4s" 
+             repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Orbiting rings -->
+  <g transform="translate(200 200)">
+    <!-- First orbit -->
+    <g>
+      <animateTransform attributeName="transform"
+                        type="rotate"
+                        from="0 0 0"
+                        to="360 0 0"
+                        dur="10s"
+                        repeatCount="indefinite"/>
+      <circle r="140" 
+              fill="none" 
+              stroke="url(#orbitGradient)" 
+              stroke-width="2" 
+              stroke-dasharray="40 20"/>
+      <circle r="4" 
+              cx="140" 
+              cy="0" 
+              fill="#ff00f7" 
+              filter="url(#glow)"/>
+    </g>
+    
+    <!-- Second orbit -->
+    <g>
+      <animateTransform attributeName="transform"
+                        type="rotate"
+                        from="360 0 0"
+                        to="0 0 0"
+                        dur="15s"
+                        repeatCount="indefinite"/>
+      <circle r="170" 
+              fill="none" 
+              stroke="url(#orbitGradient)" 
+              stroke-width="2" 
+              stroke-dasharray="60 30"/>
+      <circle r="6" 
+              cx="170" 
+              cy="0" 
+              fill="#7000ff" 
+              filter="url(#glow)"/>
+    </g>
+  </g>
+
+  <!-- Central play symbol -->
+  <g transform="translate(200 200) scale(0.8)">
+    <path d="M-30,-50 L50,0 L-30,50 Z" 
+          fill="#ffffff" 
+          filter="url(#glow)">
+      <animate attributeName="opacity"
+               values="0.7;1;0.7"
+               dur="2s"
+               repeatCount="indefinite"/>
+    </path>
+  </g>
+
+  <!-- Pulsing data points -->
+  <g transform="translate(200 200)">
+    <g fill="#00f7ff" filter="url(#glow)">
+      <circle cx="85" cy="85" r="3">
+        <animate attributeName="r"
+                 values="2;4;2"
+                 dur="1.5s"
+                 repeatCount="indefinite"/>
+      </circle>
+      <circle cx="-85" cy="-85" r="3">
+        <animate attributeName="r"
+                 values="4;2;4"
+                 dur="1.5s"
+                 repeatCount="indefinite"/>
+      </circle>
+      <circle cx="85" cy="-85" r="3">
+        <animate attributeName="r"
+                 values="3;5;3"
+                 dur="2s"
+                 repeatCount="indefinite"/>
+      </circle>
+      <circle cx="-85" cy="85" r="3">
+        <animate attributeName="r"
+                 values="5;3;5"
+                 dur="2s"
+                 repeatCount="indefinite"/>
+      </circle>
+    </g>
+  </g>
+</svg>
