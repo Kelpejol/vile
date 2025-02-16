@@ -1,8 +1,8 @@
+"use client"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useMutationData } from "@/hooks/useMutationData";
 import { useSearch } from "@/hooks/useSearch";
 import { Loader, User } from "lucide-react";
 import React from "react";
@@ -28,7 +28,7 @@ const SearchUser = ({ workSpaceId }: Props) => {
         onChange={onSearchQuery}
         value={query}
         className="bg-transparent border-2 outline-none"
-        placeholder="Search for user..."
+        placeholder="Search for users..."
         type="text"
       />
 
@@ -66,6 +66,7 @@ const SearchUser = ({ workSpaceId }: Props) => {
                   className="w-5/12 font-bold"
                 >
                   <Loader />
+                   {/* Invite */}
                 </Button>
               </div>
             </div>

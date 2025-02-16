@@ -16,11 +16,14 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useMemo } from "react";
 import Modal from "../Modal";
-import { PlusCircle } from "lucide-react";
+import { Loader, PlusCircle } from "lucide-react";
 import SearchUser from "../SearchUser";
 import { MENU_ITEMS } from "@/constant";
 import SideBarItems from "./SideBarItems";
 import { count } from "console";
+import WorkspacePlaceholder from "./WorkspacePlaceholder";
+import Card from "../Card";
+import { Button } from "@/components/ui/button";
 
 type Props = {
   activeWorkspaceId: string;
@@ -129,6 +132,67 @@ const Sidebar = ({ activeWorkspaceId }: Props) => {
           ))}
         </ul>
       </nav>
+      <Separator className="w-4/5" />
+      <p className="w-full text-[#9D9D9D] font-bold mt-4">Workspaces</p>
+      {workspace.workspace.length === 1 && workspace.members.length === 0 && (
+        <div className="w-full mt-[-10px]">
+          <p className="text-[#3c3c3c] font-medium text-sm text-ellipsis">
+            {workspace.subscription?.plan === "FREE"
+              ? "Upgrade to create workspaces"
+              : "No workspaces"}
+          </p>
+        </div>
+      )}
+      <nav className="w-full">
+        <ul className="h-[100px] overflow-auto overflow-x-hidden fade-layer">
+          {workspace.workspace.length > 0 &&
+            workspace.workspace.map(
+              (item) =>
+                item.type === "PERSONAL" && (
+                  <SideBarItems
+                    href={`/dashboard/${item.id}`}
+                    key={item.id}
+                    selected={pathName === `/dashboard/${item.id}`}
+                    title={item.name}
+                    notifications={0}
+                    icon={
+                      <WorkspacePlaceholder>
+                        {item.name.charAt(0)}
+                      </WorkspacePlaceholder>
+                    }
+                  />
+                )
+            )}
+          {workspace.members.length > 0 &&
+            workspace.members.map((item) => (
+              <SideBarItems
+                href={`/dashboard/${item.workspace.id}`}
+                key={item.workspace.id}
+                selected={pathName === `/dashboard/${item.workspace.id}`}
+                title={item.workspace.name}
+                notifications={0}
+                icon={
+                  <WorkspacePlaceholder>
+                    {item.workspace.name.charAt(0)}
+                  </WorkspacePlaceholder>
+                }
+              />
+            ))}
+        </ul>
+      </nav>
+      <Separator className="w-4/5" />
+      {workspace.subscription?.plan === "FREE" && (
+        <Card
+          title="Upgrade to Pro"
+          description="Unlock AI features like transcription, AI summary, and more"
+        >
+          <Button className="text-sm w-full mt-2">
+
+            <Loader/>
+             {/* Upgrade */}
+          </Button>
+        </Card>
+      )}
     </div>
   );
 };
