@@ -3,6 +3,7 @@ import React from "react";
 import {
   Card as _Card,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -10,7 +11,7 @@ import {
 type Props = {
   title: string;
   description: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   footer?: React.ReactNode;
 };
 
@@ -23,7 +24,9 @@ const Card = ({ title, description, children, footer }: Props) => {
           {description}
         </CardDescription>
       </CardHeader>
-      <div className="pt-2">{children}</div>
+      {children &&
+      <div className="p-2">{children}</div>}
+      {footer && <CardFooter className="p-2">{footer}</CardFooter>}
     </_Card>
   );
 };
