@@ -51,7 +51,7 @@ const Sidebar = ({ activeWorkspaceId }: Props) => {
 
   const menuItems = MENU_ITEMS(activeWorkspaceId);
 
-  return (
+  const sidebar = (
     <div className="flex-none bg-black relative p-4 h-full w-[250px] flex flex-col gap-4 items-center overflow-hidden">
       <div className="flex p-4 gap-2 justify-start items-center mb-4 absolute top-0 left-0 right-0">
         <Image src="/ai/aivid.svg" height={40} width={40} alt="logo" />
@@ -185,10 +185,13 @@ const Sidebar = ({ activeWorkspaceId }: Props) => {
         <Card
           title="Upgrade to Pro"
           description="Unlock AI features like transcription, AI summary, and more"
-          footer={}
-        >
-         
-        </Card>
+          footer={
+            <Button className="text-sm w-full bg-white text-black mt-2">
+              <Loader />
+              {/* Upgrade */}
+            </Button>
+          }
+        ></Card>
       )}
     </div>
   );
