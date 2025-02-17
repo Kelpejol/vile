@@ -5,6 +5,7 @@ import React from "react";
 import Modal from "./Modal";
 import { Button } from "@/components/ui/button";
 import { FolderPlus } from "lucide-react";
+import  WorkspaceForm from "./form/WorkspaceForm"
 
 type Props = {};
 
@@ -27,8 +28,8 @@ const CreateWorkspace = ({}: Props) => {
         </Button>
       }
     >
-        {/* <WorkspaceForm/> */}
-        g
+        <WorkspaceForm/>
+        
     </Modal>
   );
 };

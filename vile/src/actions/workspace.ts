@@ -171,3 +171,47 @@ export const getWorkSpaces = async () => {
     };
   }
 };
+
+export const createWorkspace = async (name: string) => {
+  try {
+    const user = await currentUser();
+    if (!user) return { status: 404 };
+
+    const authorized = await db.user.findUnique({
+      where: {
+        clerkId: user.id,
+      },
+      select: {
+        subscription: {
+          select: {
+            plan: true,
+          },
+        },
+      },
+    });
+    if (authorized?.subscription?.plan === "PRO") {
+      const workspace = await db.user.update({
+        where: {
+          clerkId: user.id,
+        },
+        data: {
+          workspace: {
+            create: {
+              name,
+              type: "PUBLIC",
+            },
+          },
+        },
+      });
+      if (workspace) {
+        return { status: 200, data: "Workspace Created" };
+      }
+    }
+    return {
+      status: 401,
+      data: "You are not authorized to create a workspace",
+    };
+  } catch (error) {
+    return { status: 400 };
+  }
+};
