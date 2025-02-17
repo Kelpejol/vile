@@ -8,7 +8,7 @@ type Props = {};
 
 const InfoBar = ({}: Props) => {
   return (
-    <header className="pl-20 md:pl-[250px] fixed p-4 w-full flex items-center justify-center gap-4">
+    <header className="pl-20 md:pl-[250px] fixed p-4 w-full flex items-center justify-between gap-4">
       <div className="flex gap-4 justify-center items-center border-2 rounded-full px-4 w-full max-w-lg">
         <Search size={25} className="text-[#707070]" />
         <Input
@@ -16,7 +16,7 @@ const InfoBar = ({}: Props) => {
           placeholder="Search for people, projects, tags & folders"
         />
       </div>
-      <div className="flex items-center justify-center gap-2">
+      <div className="flex items-center gap-2">
         <Button className="bg-[#1d1d1d] flex items-center gap-2">
           <UploadIcon size={20} />{" "}
           <span className="flex items-center gap-2">Upload</span>

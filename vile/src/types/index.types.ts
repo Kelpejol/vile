@@ -26,3 +26,14 @@ export type NotificationProps = {
     };
   };
 };
+
+export type UserWorkspaces = {
+    status: number;
+    data: {
+      subscription: {
+        plan: "PRO" | "FREE";
+      } | null
+    };
+  };
+ 
+

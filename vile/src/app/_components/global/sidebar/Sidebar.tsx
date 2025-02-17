@@ -199,11 +199,11 @@ const Sidebar = ({ activeWorkspaceId }: Props) => {
   );
 
   return (
-    <div className="w-full">
+    <div className="full">
       <InfoBar/>
-      <div className="md:hidden fixed py-4">
+      <div className="md:hidden fixed my-4">
         <Sheet>
-          <SheetTrigger asChild className="mt-[2px]">
+          <SheetTrigger asChild className="ml-2">
             <Menu className="mt-[2px] cursor-pointer" />
           </SheetTrigger>
           <SheetContent side={"left"} className="p-0 w-fit h-full">
