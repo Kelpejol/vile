@@ -16,7 +16,7 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useMemo } from "react";
 import Modal from "../Modal";
-import { Loader, PlusCircle } from "lucide-react";
+import { Loader, Menu, PlusCircle } from "lucide-react";
 import SearchUser from "../SearchUser";
 import { MENU_ITEMS } from "@/constant";
 import SideBarItems from "./SideBarItems";
@@ -24,6 +24,7 @@ import { count } from "console";
 import WorkspacePlaceholder from "./WorkspacePlaceholder";
 import Card from "../Card";
 import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 type Props = {
   activeWorkspaceId: string;
@@ -195,6 +196,24 @@ const Sidebar = ({ activeWorkspaceId }: Props) => {
       )}
     </div>
   );
+
+  return (
+    <div className="w-full">
+      <div className="md:hidden fixed py-4">
+        <Sheet>
+          <SheetTrigger asChild className="mt-[2px]">
+            <Button variant={"ghost"}
+            className="mt-[2px]">
+              <Menu />
+            </Button>
+          </SheetTrigger>
+          <SheetContent side={"left"} className="p-0 w-fit h-full">
+          {sidebar}
+          </SheetContent>
+        </Sheet>
+      </div>
+    </div>
+  )
 };
 
 export default Sidebar;
