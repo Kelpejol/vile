@@ -1,7 +1,9 @@
-"use client"
+"use client";
 import React from "react";
 import { useCreateWorkspace } from "@/hooks/useCreateWorkspace";
 import FormGenerator from "./FormGenerator";
+import { Button } from "@/components/ui/button";
+import { Loader } from "lucide-react";
 
 type Props = {};
 
@@ -12,12 +14,19 @@ const WorkspaceForm = () => {
       <FormGenerator
         name="name"
         placeholder="Workspace Name"
-        label="Workspace Name"
+        label="Name"
         errors={errors}
         inputType="input"
         type="text"
         register={register}
       />
+      <Button
+        className="text-sm w-full mt-2"
+        type="submit"
+        disabled={isPending}
+      >
+        {isPending ? <Loader /> : "Create Workspace"}
+      </Button>
     </form>
   );
 };
